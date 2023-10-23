@@ -28,3 +28,27 @@ def test_repo_cannot_be_found(github_api):
 def test_repo_with_single_char_be_found(github_api):
     r=github_api.search_repo('s')
     assert r['total_count']!=0
+
+@pytest.mark.api
+def test_issue_events_get_owner_existing_user(github_api):
+    r=github_api.issue_events_get_owner('ViktoriiaHaranovska')
+    assert r is not None
+
+@pytest.mark.api
+def test_issue_events_get_owner_non_existing_user(github_api):
+    r=github_api.issue_events_get_owner('jjjjjhggdg')
+    assert r is None
+
+
+@pytest.mark.api
+def test_search_repository_by_name(github_api):
+    query = "HaranovskaV-auto"
+    response = github_api.search(query)
+    assert response is not None
+
+@pytest.mark.api
+def test_get_user_info_by_username(github_api):
+    username = "ViktoriiaHaranovska"
+    user_info = github_api.get_user(username)
+    
+    assert user_info["public_repos"] >= 1
