@@ -30,25 +30,32 @@ def test_repo_with_single_char_be_found(github_api):
     assert r['total_count']!=0
 
 @pytest.mark.api
-def test_issue_events_get_owner_existing_user(github_api):
-    r=github_api.issue_events_get_owner('ViktoriiaHaranovska')
-    assert r is not None
+def test_get_owner_existing_user(github_api):
+    r=github_api.retrieve_events_triggered_by_activity_in_issues('ViktoriiaHaranovska')
+    assert r is None
 
 @pytest.mark.api
-def test_issue_events_get_owner_non_existing_user(github_api):
-    r=github_api.issue_events_get_owner('jjjjjhggdg')
+def test_get_owner_non_existing_user(github_api):
+    r=github_api.retrieve_events_triggered_by_activity_in_issues('jjjjjhggdg')
     assert r is None
 
 
 @pytest.mark.api
-def test_search_repository_by_name(github_api):
-    query = "HaranovskaV-auto"
-    response = github_api.search(query)
-    assert response is not None
+def test_get_reactions_for_issue(github_api):
+    owner = 'TheAlgorithms'
+    repo = 'Python'
+    discussion_number = '9343'
+    comment_number = '1'
+    r = github_api.retrieve_reactions_for_issue (owner, repo, discussion_number, comment_number)
+    assert len(r) >0
 
 @pytest.mark.api
-def test_get_user_info_by_username(github_api):
-    username = "ViktoriiaHaranovska"
-    user_info = github_api.get_user(username)
-    
-    assert user_info["public_repos"] >= 1
+def test_reactions_count_for_comment(github_api):
+    owner = 'TheAlgorithms'
+    repo = 'Python'
+    discussion_number = '9343'
+    comment_number = '1'
+    r = github_api.retrieve_reactions_for_issue(owner, repo, discussion_number, comment_number)
+
+    expected_reactions_count = 2
+    assert len(r) == expected_reactions_count

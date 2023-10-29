@@ -17,15 +17,15 @@ class GitHub:
 
         return body
     
-    def issue_events_get_owner(self,owner):
-        r=requests.get(f'https://api.github.com/users/{owner}')
+    def retrieve_events_triggered_by_activity_in_issues (self,owner):
+        r=requests.get(f'https://api.github.com/repos/OWNER/REPO/issues/events{owner}')
         if r.status_code == 200:
             body = r.json()
             return body
         else:
             return None
 
-    def search(self, query):
-        r = requests.get(f'https://api.github.com/search/repositories?q={query}')
+    def retrieve_reactions_for_issue(self, owner, repo, discussion_number, comment_number):
+        r = requests.get(f'https://api.github.com/repos/{owner}/{repo}/discussions/{discussion_number}/comments/{comment_number}/reactions')
         body = r.json()
         return body
