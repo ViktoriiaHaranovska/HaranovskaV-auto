@@ -1,7 +1,9 @@
 Overview
+
 Welcome to the project! This repository aims to provide a framework, developed by Haranovska Viktoriia, for showcasing automated testing of API, UI, and Database functionalities. The project is particularly valuable as it demonstrates automation solutions for testing popular websites such as GitHub and Chess.com.
 
 Getting Started
+
 To get started with the project, it is recommended to begin exploring the config folder. The config.py file is utilized to verify whether the program functions as expected. 
 
 Proceed to the modules folder, where you will find classes such as:
