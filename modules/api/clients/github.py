@@ -17,7 +17,7 @@ class GitHub:
 
         return body
     
-    def retrieve_events_triggered_by_activity_in_issues (self,owner):
+    def retrieve_events_triggered_by_activity_in_issues(self,owner):
         r=requests.get(f'https://api.github.com/repos/OWNER/REPO/issues/events{owner}')
         if r.status_code == 200:
             body = r.json()

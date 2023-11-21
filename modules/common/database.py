@@ -64,14 +64,14 @@ class Database():
         return table_count
 
     def execution_time_of_the_query(self):
+        start_time = time.time()
         query = "SELECT * FROM customers"
         self.cursor.execute(query)
         records = self.cursor.fetchall()
-        start_time = time.time()
         end_time = time.time()
         return (start_time, end_time)
 
-    def new_column(self, column_name, table_name):
+    def add_new_column(self, column_name, table_name):
         query = f"ALTER TABLE {table_name}\
         ADD COLUMN {column_name} TEXT;"
         self.cursor.execute(query)
